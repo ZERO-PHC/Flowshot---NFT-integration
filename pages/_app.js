@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+
 import "@picocss/pico";
 import "../styles/globals.css";
 import Link from "next/link";
@@ -5,6 +7,12 @@ import AuthProvider from "../contexts/AuthContext";
 import TransactionProvider from "../contexts/TransactionContext";
 
 function MyApp({ Component, pageProps }) {
+
+  useEffect(() => {
+    
+  }, [])
+  
+
   return (
     <div>
       <nav className="container header">

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import "../flow/config";
 import { useAuth } from "../contexts/AuthContext";
 import Profile from "./Profile";
@@ -5,6 +6,8 @@ import Profile from "./Profile";
 function Landing() {
   const { currentUser, profileExists, logOut, logIn, signUp, createProfile } =
     useAuth();
+
+  
 
   const AuthedState = () => {
     return (
@@ -21,7 +24,7 @@ function Landing() {
   const UnauthenticatedState = () => {
     return (
       <div>
-        <button onClick={logIn}>Log In</button>
+        <button onClick={logIn}>Log In 2 </button>
         <button onClick={signUp}>Sign Up</button>
       </div>
     );

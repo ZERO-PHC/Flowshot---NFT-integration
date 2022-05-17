@@ -37,10 +37,29 @@ export default function AuthProvider({ children }) {
     return profile;
   }, [currentUser, setProfile, setProfileExists]);
 
+  const getOwnership = useCallback(async () => {
+    const isOwner = await fcl.query({
+      cadence: `
+      import Flovatar from 0x0cf264811b95d465
+      
+      pub fun main(address: Address): Int {
+          if let collection = getAccount(address).getCapability(/public/FlovatarCollection).borrow<&{Flovatar.CollectionPublic}>() {
+              return collection.getIDs().length
+          }
+          return -1
+      }
+      `,
+      args: (arg, t) => [arg(currentUser.addr, t.Address)],
+    });
+    
+    console.log("isOwner", isOwner)
+  }, [currentUser]);
+
   useEffect(() => {
     // Upon login check if a userProfile exists
     if (currentUser.loggedIn && userProfile === null) {
       loadProfile();
+    getOwnership()
     }
   }, [currentUser, userProfile, loadProfile]);
 
@@ -146,6 +165,7 @@ export default function AuthProvider({ children }) {
     loadProfile,
     createProfile,
     updateProfile,
+    getOwnership
   };
 
   console.log("AuthProvider", value);

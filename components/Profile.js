@@ -1,18 +1,20 @@
 import { useAuth } from "../contexts/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Profile() {
-  const { userProfile, updateProfile } = useAuth();
+  const { userProfile, updateProfile, getOwnership } = useAuth();
   const [editedProfile, setProfile] = useState(userProfile);
 
   const saveProfile = () => {
     updateProfile(editedProfile);
   };
 
+
+
   return (
     <article className="card">
       <label htmlFor="address">
-        Address
+        Address2
         <input
           type="text"
           id="address"
